@@ -5,8 +5,11 @@ export const getTimelineInfos = async () => {
     const notion = new Client({
         auth: process.env.NOTION_TOKEN,
     })
+
+    console.log("Fetching data from Notion...");
     const database = await notion.databases.query({ database_id: process.env.DATABASE_ID! })
     const result = []
+
     for (const page of database.results) {
         const p = (await notion.pages.retrieve({ page_id: page.id })) as unknown as { properties: any, created_time: Date }
 
@@ -19,6 +22,8 @@ export const getTimelineInfos = async () => {
             created_time: p.created_time,
         })
     }
+
+    console.log("Fetching data from Notion... Done");
 
     result.sort(function (a, b) {
         return new Date(a.date.date.start) as unknown as number - (new Date(b.date.date.start) as unknown as number);
