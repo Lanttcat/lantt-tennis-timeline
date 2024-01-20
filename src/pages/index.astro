@@ -1,6 +1,12 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import { format } from "date-fns";
+import { getTimelineInfos, convertTextAarry } from '../services/notion';
+
+const pages = await getTimelineInfos();
+
 ---
+
 
 <Layout title="网球前进 Timeline">
 	<main>
@@ -9,72 +15,31 @@ import Layout from '../layouts/Layout.astro';
 				<div class="hero-content text-center">
 				<div class="max-w-md">
 					<h1 class="text-5xl font-bold">哈喽, 我是 Lantt。</h1>
-					<p class="py-6">这里是我的网球改善记录以及当下的目标，如果你也喜欢网球，希望你能在这里也能有所收获。</p>
+					<p class="py-6">这里是我的网球改善记录以及当下的目标，如果你也喜欢网球，希望你能在这里也能有所收获。
 				</div>
 				</div>
 			</div>
 		</div>
 		<section>
 			<ul class="timeline timeline-snap-icon max-md:timeline-compact timeline-vertical">
-				<li>
-				<div class="timeline-middle">
-					<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="h-5 w-5 text-primary"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clip-rule="evenodd" /></svg>
-				</div>
-				<div class="timeline-start md:text-end mb-10">
-					<time class="font-mono italic">2023.10</time>
-					<div class="text-lg font-black">单反稳定性</div>
-					减少单反掉拍头，更多的向前顶和撞，减少单反的旋转。掉拍头会来不及，先能把球回过去再说。球速更快一些，是我目前比较想要的效果。
-				</div>
-				<hr class="bg-primary"/>
-				</li>
-				<li>
-				<hr class="bg-primary"/>
-				<div class="timeline-middle">
-					<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="h-5 w-5 text-primary"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clip-rule="evenodd" /></svg>
-				</div>
-				<div class="timeline-end mb-10">
-					<time class="font-mono italic">2023.10</time>
-					<div class="text-lg font-black">发球肩带</div>
-					之前因为发球时，手臂使用力量过多，导致肩袖被拉扯受伤，现在需要更多的使用身体的力量，肩膀发力更多，减少肩膀的受伤。
-				</div>
-				<hr class="bg-primary"/>
-				</li>
-				<li>
-				<hr class="bg-primary"/>
-				<div class="timeline-middle">
-					<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="h-5 w-5 text-primary"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clip-rule="evenodd" /></svg>
-				</div>
-				<div class="timeline-start md:text-end mb-10">
-					<time class="font-mono italic">2024.01</time>
-					<div class="text-lg font-black">平台发球向前曲膝</div>
-
-					膝盖向前曲膝，不要重心向后，左臂尽量向后向上伸直，在身体向前时可以带动，同时可以明显感觉到身体在向前。
-				</div>
-				<hr class="bg-primary"/>
-				</li>
-				<li>
-				<hr />
-				<div class="timeline-middle">
-					<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="h-5 w-5"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clip-rule="evenodd" /></svg>
-				</div>
-				<div class="timeline-end mb-10">
-					<time class="font-mono italic">2024.01</time>
-					<div class="text-lg font-black">正手上旋-食指</div>
-					食指最后主动发力，带动拍子。
-				</div>
-				<hr />
-				</li>
-				<li>
-				<hr />
-				<div class="timeline-middle">
-					<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="h-5 w-5"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clip-rule="evenodd" /></svg>
-				</div>
-				<div class="timeline-start md:text-end mb-10">
-					<time class="font-mono italic">2024.01</time>
-					<div class="text-lg font-black">上旋发球</div>
-					身体不要完全打开
-				</div>
-				</li>
+				{
+					pages.map((page, i) => {
+						return (
+							<li>
+								{i !== 0 && <hr class={`${pages[i+1]?.doing.status.name === 'Done' ? "bg-primary" : ""}`}/> }
+								<div class="timeline-middle">
+									<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class={`${page.doing.status.name === 'Done' ? "text-primary" : ""} h-5 w-5`}><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clip-rule="evenodd" /></svg>
+								</div>
+								<div class={`${i % 2 === 0 ? "timeline-start md:text-end" : "timeline-end"} mb-10`}>
+									<time class="font-mono italic">{format(new Date(page.date.date.start), 'MM/dd/yyyy')}</time>
+									<div class="text-lg font-black">{convertTextAarry(page.title.title)}</div>
+									{convertTextAarry(page.description.rich_text)}
+								</div>
+								<hr class={`${page.doing.status.name === 'Done' ? "bg-primary" : ""}`}/>
+							</li>
+						)
+					})
+				}
 			</ul>
 			</section>
 		  <footer class="footer footer-center p-10">
